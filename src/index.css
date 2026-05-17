@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f1f7f6;
+  --color-primary-100: #dceceb;
+  --color-primary-200: #bcd9d6;
+  --color-primary-300: #8ebdb8;
+  --color-primary-400: #5b9993;
+  --color-primary-500: #1a4d48; /* Dark Teal from slides */
+  --color-primary-600: #143d39;
+  --color-primary-700: #11322f;
+  --color-primary-800: #0e2826;
+  --color-primary-900: #0b1f1d;
+  --color-primary-950: #061211;
+
+  --color-accent-50: #fbf9f4;
+  --color-accent-100: #f4efdf;
+  --color-accent-200: #e8dbbc;
+  --color-accent-300: #d7bf8e;
+  --color-accent-400: #c5a163; /* Gold/Beige from slides */
+  --color-accent-500: #b58d4a;
+  --color-accent-600: #a1783e;
+  --color-accent-700: #866135;
+  --color-accent-800: #6d4f2e;
+  --color-accent-900: #5b4229;
+  --color-accent-950: #332415;
+
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+
+  --animate-gradient-x: gradient-x 15s ease infinite;
+  --animate-gradient-y: gradient-y 15s ease infinite;
+  --animate-gradient-xy: gradient-xy 15s ease infinite;
+
+  @keyframes gradient-y {
+    0%, 100% { background-size: 400% 400%; background-position: center top; }
+    50% { background-size: 200% 200%; background-position: center center; }
+  }
+  @keyframes gradient-x {
+    0%, 100% { background-size: 200% 200%; background-position: left center; }
+    50% { background-size: 200% 200%; background-position: right center; }
+  }
+  @keyframes gradient-xy {
+    0%, 100% { background-size: 400% 400%; background-position: left center; }
+    50% { background-size: 200% 200%; background-position: right center; }
+  }
+}
+
+:root {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  color-scheme: dark light;
+  background-color: #030712;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #030712 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--color-primary-600);
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-700);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
