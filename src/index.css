@@ -89,3 +89,48 @@ body {
 .btn-primary:active {
   transform: scale(0.95);
 }
+
+/* Light mode overrides */
+.light-mode .text-white,
+.light-mode .text-accent-100,
+.light-mode .text-accent-200 {
+  color: #111827 !important; /* gray-900 */
+}
+
+.light-mode .text-gray-300 {
+  color: #374151 !important; /* gray-700 */
+}
+
+.light-mode .text-gray-400,
+.light-mode .text-gray-500 {
+  color: #4b5563 !important; /* gray-600 */
+}
+
+.light-mode .placeholder\:text-gray-600::placeholder {
+  color: #6b7280 !important;
+}
+
+.light-mode .border-white\/5,
+.light-mode .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.light-mode .bg-white\/5,
+.light-mode .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.light-mode .bg-primary-950\/80 {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.light-mode .hover\:bg-white\/5:hover,
+.light-mode .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-mode .glass {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}

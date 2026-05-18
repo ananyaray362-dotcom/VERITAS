@@ -93,16 +93,15 @@ const Hero = ({ onAnalyze }) => {
         >
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-accent-400/10 border border-accent-400/20 mb-8">
             <Sparkles className="w-4 h-4 text-accent-400" />
-            <span className="text-xs font-bold text-accent-400 uppercase tracking-widest">Intelligent Verification Platform</span>
+            <span className="text-xs font-bold text-accent-400 uppercase tracking-widest">Digital Credibility Verification Platform</span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-light tracking-wide text-accent-100 font-serif mb-8 leading-tight">
-            Our Fake News <br />
-            <span className="text-accent-400 italic font-normal">Detection Platform.</span>
+          <h1 className="text-[6rem] md:text-[10rem] lg:text-[13rem] font-bold tracking-tighter text-white mb-4 leading-none">
+            Veri<span className="text-accent-400">tas</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-400 mb-14 max-w-3xl mx-auto leading-relaxed font-serif italic">
-            In an age of information overload, truth needs a champion. <span className="text-white not-italic font-sans">Veritas</span> uses advanced AI to separate fact from fiction instantly.
+          <p className="text-xl md:text-2xl text-gray-400 mb-14 max-w-3xl mx-auto leading-relaxed font-serif tracking-wide">
+            In an age of information overload, truth needs a champion. <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-accent-300 to-accent-500 drop-shadow-lg mx-1">Veritas</span> uses advanced AI to separate fact from fiction instantly.
           </p>
         </motion.div>
 
@@ -115,8 +114,7 @@ const Hero = ({ onAnalyze }) => {
           <form onSubmit={handleSubmit} className="relative group">
             <div className="absolute inset-0 bg-accent-400/20 rounded-2xl blur-2xl group-hover:bg-accent-400/30 transition-all duration-500 opacity-30"></div>
             <div className="relative flex items-center p-2.5 bg-primary-950/80 backdrop-blur-2xl border border-white/10 rounded-2xl focus-within:border-accent-400/50 transition-all duration-300">
-              <div className="pl-4 flex items-center space-x-3">
-                <Search className="w-6 h-6 text-gray-500" />
+              <div className="pl-4 flex items-center">
                 <button 
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
