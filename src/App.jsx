@@ -11,6 +11,7 @@ import Metrics from './pages/Metrics';
 import BackgroundGraphic from './components/BackgroundGraphic';
 import Analyze from './pages/Analyze';
 import Chat from './pages/Chat';
+import ImplementationPlan from './pages/ImplementationPlan';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { supabase } from './lib/supabaseClient';
@@ -310,6 +311,7 @@ function App() {
           <Route path="/dashboard" element={session ? <Dashboard history={history} onSelect={(res) => { setResult(res); window.location.href='/'; }} /> : <Navigate to="/auth" />} />
           <Route path="/settings" element={session ? <Settings /> : <Navigate to="/auth" />} />
           <Route path="/metrics" element={<Metrics />} />
+          <Route path="/strategy" element={<ImplementationPlan />} />
         </Routes>
 
         <footer className="py-12 px-6 border-t border-white/5 text-center">
