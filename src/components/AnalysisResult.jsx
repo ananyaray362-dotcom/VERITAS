@@ -39,6 +39,14 @@ const AnalysisResult = ({ result, loading }) => {
     return 'bg-red-500/10 border-red-500/20';
   };
 
+  const getActionFeedback = (score) => {
+    if (score >= 90) return "✅ Yes, this link is safe and verified. You can proceed with confidence.";
+    if (score >= 75) return "✅ Generally safe, but remain cautious about minor biases.";
+    if (score >= 50) return "⚠️ Proceed with caution. The content has mixed credibility.";
+    if (score >= 30) return "🚨 Highly suspicious. We strongly recommend NOT interacting with this link.";
+    return "🛑 NO! Never click on it. This is a confirmed threat.";
+  };
+
   // Pentagonal spider radar calculations
   const angles = [-90, -18, 54, 126, 198];
   
@@ -95,6 +103,11 @@ const AnalysisResult = ({ result, loading }) => {
               <h3 className="text-xl font-bold text-gray-300 mb-2">Credibility Rating</h3>
               <div className={`text-7xl font-black mb-4 ${getScoreColor(result.trustScore)}`}>
                 {result.trustScore}%
+              </div>
+              <div className="mb-6 w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl shadow-lg">
+                <p className={`text-sm font-bold ${getScoreColor(result.trustScore)}`}>
+                  {getActionFeedback(result.trustScore)}
+                </p>
               </div>
               <p className="text-gray-400 text-sm mb-8">
                 {result.trustScore >= 80 
@@ -231,18 +244,20 @@ const AnalysisResult = ({ result, loading }) => {
                 </div>
               </div>
 
-              {/* Right Column: Panic index, official message & propagation graph */}
-              <div className="w-full md:w-1/2 space-y-6">
+              {/* Right Column: Panic index & Official message */}
+              <div className="w-full md:w-1/2 space-y-6 flex flex-col justify-center">
                 <div>
                   <div className="flex items-center space-x-2.5 mb-2">
                     <HeartPulse className={`w-5 h-5 ${result.panicScore > 40 ? 'text-red-400 animate-pulse' : 'text-green-400 animate-ping'}`} />
                     <span className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Official Resource Safety Audit</span>
                   </div>
                   
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">{result.panicVerdict || "Calm / Fully Verified"}</span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                  <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                    <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-3 mb-4">
+                      <span className="text-sm font-mono font-bold text-white uppercase tracking-wider leading-snug">
+                        {result.panicVerdict || "Calm / Fully Verified"}
+                      </span>
+                      <span className={`shrink-0 whitespace-nowrap text-xs font-bold px-3 py-1.5 rounded-full border ${
                         result.panicScore > 40 
                           ? 'text-red-400 bg-red-400/10 border-red-400/20' 
                           : 'text-green-400 bg-green-400/10 border-green-400/20'
@@ -250,38 +265,9 @@ const AnalysisResult = ({ result, loading }) => {
                         Panic Index: {result.panicScore || 0}%
                       </span>
                     </div>
-                    <p className="text-sm text-gray-300 leading-relaxed font-sans pt-1">
+                    <p className="text-base text-gray-300 leading-relaxed font-sans pt-1">
                       {result.panicAdvice || "This query contains no alarmist markers. Spread positivity, not panic!"}
                     </p>
-                  </div>
-                </div>
-
-                {/* Rumor vs Official Propagation wave Comparison */}
-                <div className="p-4 rounded-2xl bg-[#0b1f1d]/30 border border-primary-500/10 space-y-3">
-                  <div className="flex items-center justify-between text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                    <span>Propagation Wave</span>
-                    <span className="text-accent-400">Veritas Mitigation Effect</span>
-                  </div>
-
-                  <div className="relative h-20 w-full flex items-end">
-                    <svg className="w-full h-full overflow-visible" viewBox="0 0 100 20" preserveAspectRatio="none">
-                      {/* Rumor curve (Red) */}
-                      <path d="M 0 20 Q 20 2, 40 2 T 80 18 T 100 20" fill="none" stroke="#ef4444" strokeWidth="1" strokeDasharray="1,1" opacity="0.6" />
-                      {/* Official stabilization curve (Green) */}
-                      <path d="M 0 20 Q 30 18, 50 15 T 80 18 T 100 20" fill="none" stroke="#10b981" strokeWidth="1.2" />
-                      {/* Nodes */}
-                      <circle cx="50" cy="15" r="1" fill="#10b981" />
-                    </svg>
-                    <div className="absolute top-1 left-2 text-[9px] font-mono text-red-400 bg-red-400/10 px-1 py-0.5 rounded border border-red-400/20">
-                      Rumor Peak Wave
-                    </div>
-                    <div className="absolute top-1 right-2 text-[9px] font-mono text-green-400 bg-green-400/10 px-1 py-0.5 rounded border border-green-400/20">
-                      Official Halt Signal
-                    </div>
-                  </div>
-
-                  <div className="text-[10px] text-gray-500 font-mono text-center">
-                    Veritas validation stabilizes panic waves by -94.2% within minutes.
                   </div>
                 </div>
               </div>
@@ -289,45 +275,41 @@ const AnalysisResult = ({ result, loading }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <div className="glass p-6 rounded-2xl border border-white/5">
               <div className="flex items-center space-x-2 mb-4">
                 <BarChart3 className="w-5 h-5 text-accent-400" />
                 <h4 className="font-bold text-white">Sentiment Dynamics</h4>
               </div>
               <div className="space-y-4">
-                {result.sentimentScores && Object.entries(result.sentimentScores).map(([sentiment, score]) => (
-                  <div key={sentiment}>
-                    <div className="flex justify-between text-[10px] mb-1 uppercase tracking-widest font-bold">
-                      <span className="text-gray-500">{sentiment}</span>
-                      <span className="text-gray-400">{score}%</span>
+                {result.sentimentScores && Object.entries(result.sentimentScores).map(([sentiment, score]) => {
+                  const sentimentEmojis = {
+                    fear: '😨',
+                    anger: '😡',
+                    joy: '😊',
+                    sadness: '😢',
+                    surprise: '😲'
+                  };
+                  return (
+                    <div key={sentiment}>
+                      <div className="flex justify-between text-[10px] mb-1 uppercase tracking-widest font-bold">
+                        <span className="text-base" title={sentiment}>{sentimentEmojis[sentiment] || '😐'}</span>
+                        <span className="text-gray-400">{score}%</span>
+                      </div>
+                      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          animate={{ width: `${score}%` }}
+                          className={`h-full ${
+                            sentiment === 'fear' || sentiment === 'anger' ? 'bg-red-500' : 
+                            sentiment === 'joy' ? 'bg-green-500' : 'bg-accent-400'
+                          }`}
+                        />
+                      </div>
                     </div>
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        animate={{ width: `${score}%` }}
-                        className={`h-full ${
-                          sentiment === 'fear' || sentiment === 'anger' ? 'bg-red-500' : 
-                          sentiment === 'joy' ? 'bg-green-500' : 'bg-accent-400'
-                        }`}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-            </div>
-            
-            <div className="glass p-6 rounded-2xl border border-white/5">
-              <div className="flex items-center space-x-2 mb-4">
-                <Fingerprint className="w-5 h-5 text-accent-400" />
-                <h4 className="font-bold text-white">Truth Markers</h4>
-              </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                {result.credibilityMarkers}
-              </p>
-              <button className="mt-6 w-full py-3 bg-accent-400/10 hover:bg-accent-400/20 text-accent-400 rounded-xl text-xs font-bold border border-accent-400/20 transition-all">
-                Cross-Verify Source
-              </button>
             </div>
           </div>
 
