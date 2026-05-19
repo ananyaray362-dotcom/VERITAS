@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Metrics from './pages/Metrics';
 import BackgroundGraphic from './components/BackgroundGraphic';
+import Analyze from './pages/Analyze';
+import Chat from './pages/Chat';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { supabase } from './lib/supabaseClient';
@@ -236,9 +238,6 @@ function App() {
       saveToHistory(input, mockResult);
     } finally {
       setLoading(false);
-      setTimeout(() => {
-        window.scrollTo({ top: 600, behavior: 'smooth' });
-      }, 100);
     }
   };
 
@@ -277,15 +276,9 @@ function App() {
         <Routes>
           <Route path="/" element={
             <main>
-              <Hero onAnalyze={handleAnalyze} />
-              <AnimatePresence>
-                {(loading || result) && (
-                  <AnalysisResult loading={loading} result={result} />
-                )}
-              </AnimatePresence>
-              {!loading && !result && (
-                <section className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
-                  <div className="text-center mb-16">
+              <Hero />
+              <section className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+                <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4">Powerful Features for Truth</h2>
                     <p className="text-gray-400">Our advanced algorithms work tirelessly to keep you informed.</p>
                   </div>
@@ -309,9 +302,10 @@ function App() {
                     ))}
                   </div>
                 </section>
-              )}
             </main>
           } />
+          <Route path="/analyze" element={<Analyze onAnalyze={handleAnalyze} loading={loading} result={result} />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/auth" element={!session ? <Auth /> : <Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={session ? <Dashboard history={history} onSelect={(res) => { setResult(res); window.location.href='/'; }} /> : <Navigate to="/auth" />} />
           <Route path="/settings" element={session ? <Settings /> : <Navigate to="/auth" />} />
