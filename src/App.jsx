@@ -8,6 +8,7 @@ import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Metrics from './pages/Metrics';
+import BackgroundGraphic from './components/BackgroundGraphic';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { supabase } from './lib/supabaseClient';
@@ -255,7 +256,9 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen ${isDarkMode ? 'bg-[#030712] text-white' : 'bg-gray-50 text-gray-900'} selection:bg-accent-400/30 transition-colors duration-500`}>
+      <div className={`min-h-screen relative ${isDarkMode ? 'bg-[#030712] text-white' : 'light-mode bg-gray-50 text-gray-900'} selection:bg-accent-400/30 transition-colors duration-500`}>
+        <BackgroundGraphic isDarkMode={isDarkMode} />
+        
         <Navbar 
           onOpenHistory={() => setIsHistoryOpen(true)} 
           isDarkMode={isDarkMode} 

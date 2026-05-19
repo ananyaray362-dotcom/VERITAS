@@ -18,11 +18,11 @@ const HistorySidebar = ({ history, isOpen, onClose, onSelect, onClear }) => {
           
           {/* Sidebar */}
           <motion.div
-            initial={{ x: '100%' }}
+            initial={{ x: '-100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: '-100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-gray-950 border-l border-white/10 z-[70] shadow-2xl overflow-hidden flex flex-col"
+            className="fixed left-0 top-0 bottom-0 w-full max-w-md bg-gray-950 border-r border-white/10 z-[70] shadow-2xl overflow-hidden flex flex-col"
           >
             <div className="p-6 border-b border-white/10 flex items-center justify-between bg-gray-900/50">
               <div className="flex items-center space-x-3">

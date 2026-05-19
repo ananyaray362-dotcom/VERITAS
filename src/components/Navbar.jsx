@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, History, User, Moon, Sun, Settings as SettingsIcon, Menu, X } from 'lucide-react';
+import { Shield, History, User, Moon, Sun, Settings as SettingsIcon, Menu, X, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -10,14 +10,24 @@ const Navbar = ({ onOpenHistory, isDarkMode, onToggleTheme, user }) => {
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
       <div className="max-w-7xl mx-auto glass rounded-2xl border border-white/10 px-6 py-4 flex items-center justify-between backdrop-blur-xl">
         <div className="flex items-center space-x-12">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-accent-400/10 rounded-lg group-hover:bg-accent-400/20 transition-all">
-              <Shield className="w-6 h-6 text-accent-400" />
-            </div>
-            <span className="text-2xl font-bold tracking-tighter text-white">
-              Veri<span className="text-accent-400">tas</span>
-            </span>
-          </Link>
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={onOpenHistory}
+              className="p-2 hover:bg-white/5 rounded-lg transition-colors text-gray-400 hover:text-white"
+              title="View History"
+            >
+              <Home className="w-6 h-6" />
+            </button>
+            <Link to="/" className="flex items-center space-x-2 group">
+              <div className="p-2 bg-accent-400/10 rounded-lg group-hover:bg-accent-400/20 transition-all relative flex items-center justify-center">
+                <Shield className="w-6 h-6 text-accent-400" />
+                <span className="absolute text-accent-400 font-serif font-bold text-[11px] mt-0.5">V</span>
+              </div>
+              <span className="text-2xl font-bold tracking-tighter text-white">
+                Veri<span className="text-accent-400">tas</span>
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
@@ -38,13 +48,7 @@ const Navbar = ({ onOpenHistory, isDarkMode, onToggleTheme, user }) => {
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
 
-          <button 
-            onClick={onOpenHistory}
-            className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center space-x-2"
-          >
-            <History className="w-4 h-4" />
-            <span className="hidden sm:inline">History</span>
-          </button>
+
 
           {user ? (
             <div className="flex items-center space-x-4 pl-4 border-l border-white/10">
