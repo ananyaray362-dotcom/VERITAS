@@ -33,6 +33,7 @@ const Navbar = ({ onOpenHistory, isDarkMode, onToggleTheme, user }) => {
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-sm font-medium text-gray-300 hover:text-accent-400 transition-colors">Instant Analysis</Link>
             <Link to="/metrics" className="text-sm font-medium text-gray-300 hover:text-accent-400 transition-colors">System Metrics</Link>
+            <Link to="/strategy" className="text-sm font-medium text-gray-300 hover:text-accent-400 transition-colors">Platform Strategy</Link>
             {user && (
               <Link to="/dashboard" className="text-sm font-medium text-gray-300 hover:text-accent-400 transition-colors">Dashboard</Link>
             )}
@@ -91,6 +92,7 @@ const Navbar = ({ onOpenHistory, isDarkMode, onToggleTheme, user }) => {
             <div className="p-6 flex flex-col space-y-4">
               <Link to="/" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-accent-400">Home</Link>
               <Link to="/metrics" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-accent-400">System Metrics</Link>
+              <Link to="/strategy" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-accent-400">Platform Strategy</Link>
               <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-accent-400">Dashboard</Link>
               <Link to="/settings" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-accent-400">Settings</Link>
               {!user && (
